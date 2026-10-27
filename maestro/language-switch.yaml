@@ -1,0 +1,33 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/navigate-to-profile.yaml
+
+# Tap language selector
+- tapOn:
+    id: "profile-language-btn"
+- extendedWaitUntil:
+    visible:
+      id: "language-picker"
+    timeout: 3000
+
+# Select English
+- tapOn:
+    id: "language-en"
+- extendedWaitUntil:
+    visible: "Profile"
+    timeout: 5000
+
+# Tap language selector again
+- tapOn:
+    id: "profile-language-btn"
+- extendedWaitUntil:
+    visible:
+      id: "language-picker"
+    timeout: 3000
+
+# Select Deutsch
+- tapOn:
+    id: "language-de"
+- extendedWaitUntil:
+    visible: "Profil"
+    timeout: 5000

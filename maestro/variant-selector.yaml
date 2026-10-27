@@ -1,0 +1,34 @@
+appId: com.vaultcollector.app
+---
+- launchApp
+- tapOn:
+    id: "tabs-collection"
+- tapOn:
+    id: "collection-list-item-0"
+- tapOn:
+    id: "add-item-btn"
+- tapOn:
+    id: "tcg-type-yugioh"
+- inputText:
+    id: "add-item-search-input"
+    text: "Dark Magician"
+- tapOn:
+    id: "add-item-search-btn"
+- tapOn:
+    id: "search-result-0"
+# Step 1: Artwork selection
+- assertVisible:
+    id: "variant-artwork-carousel"
+- assertVisible:
+    id: "variant-next-btn"
+- tapOn:
+    id: "variant-next-btn"
+# Step 2: Version selection
+- assertVisible:
+    id: "variant-version-0"
+- tapOn:
+    id: "variant-version-1"
+- tapOn:
+    id: "variant-add-btn"
+- assertVisible:
+    id: "condition-near_mint"

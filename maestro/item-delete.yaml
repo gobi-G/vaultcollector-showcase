@@ -1,0 +1,29 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/navigate-to-collection.yaml
+
+# Tap first item
+- tapOn:
+    id: "item-card-0"
+- extendedWaitUntil:
+    visible:
+      id: "item-detail"
+    timeout: 5000
+
+# Tap delete button
+- tapOn:
+    id: "item-delete-btn"
+
+# Confirm deletion in confirm sheet
+- extendedWaitUntil:
+    visible:
+      id: "confirm-delete-btn"
+    timeout: 3000
+- tapOn:
+    id: "confirm-delete-btn"
+
+# Verify we are back on collection detail (item gone)
+- extendedWaitUntil:
+    visible:
+      id: "collection-detail"
+    timeout: 5000

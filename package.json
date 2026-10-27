@@ -1,0 +1,40 @@
+{
+  "name": "vault-collector",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "clean": "turbo clean",
+    "lint:root": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "turbo typecheck",
+    "e2e": "maestro test --platform ios maestro/",
+    "e2e:all": "maestro test --platform ios maestro/",
+    "e2e:auth": "maestro test --platform ios maestro/auth-login.yaml",
+    "e2e:collection": "maestro test --platform ios maestro/collection-create.yaml",
+    "e2e:add-item": "maestro test --platform ios maestro/add-item.yaml",
+    "e2e:item-edit": "maestro test --platform ios maestro/item-edit.yaml",
+    "e2e:item-delete": "maestro test --platform ios maestro/item-delete.yaml",
+    "e2e:vault": "maestro test --platform ios maestro/vault-navigation.yaml",
+    "e2e:profile": "maestro test --platform ios maestro/profile-edit.yaml",
+    "e2e:language": "maestro test --platform ios maestro/language-switch.yaml",
+    "e2e:prices": "maestro test --platform ios maestro/price-refresh.yaml",
+    "e2e:paywall": "maestro test --platform ios maestro/paywall.yaml"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "prettier": "^3.8.1",
+    "turbo": "^2",
+    "typescript-eslint": "^8.57.1"
+  },
+  "packageManager": "pnpm@10.32.1"
+}

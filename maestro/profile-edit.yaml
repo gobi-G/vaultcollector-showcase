@@ -1,0 +1,26 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/navigate-to-profile.yaml
+
+# Tap edit name
+- tapOn:
+    id: "profile-edit-name-btn"
+- extendedWaitUntil:
+    visible:
+      id: "profile-name-input"
+    timeout: 3000
+
+# Clear existing name and enter new name
+- tapOn:
+    id: "profile-name-input"
+- eraseText: 50
+- inputText: "Test User"
+
+# Save
+- tapOn:
+    id: "profile-name-save-btn"
+
+# Verify updated name is visible
+- extendedWaitUntil:
+    visible: "Test User"
+    timeout: 5000

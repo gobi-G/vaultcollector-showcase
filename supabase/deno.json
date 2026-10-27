@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true
+  },
+  "unstable": ["sloppy-imports"],
+  "imports": {
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2"
+  },
+  "tasks": {
+    "test": "deno test --allow-env --allow-net",
+    "test:watch": "deno test --allow-env --allow-net --watch"
+  }
+}

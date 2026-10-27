@@ -1,0 +1,26 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/login.yaml
+
+# Navigate to collection tab (3rd tab)
+- tapOn: "tab-collection"
+- extendedWaitUntil:
+    visible:
+      id: "collection-create-btn"
+    timeout: 5000
+
+# Create collection
+- tapOn:
+    id: "collection-create-btn"
+- tapOn:
+    id: "create-collection-name"
+- inputText: "Meine Pokemon Sammlung"
+- tapOn:
+    id: "create-collection-category-tcg"
+- tapOn:
+    id: "create-collection-submit"
+
+# Wait for navigation back and verify
+- extendedWaitUntil:
+    visible: "Meine Pokemon Sammlung"
+    timeout: 5000

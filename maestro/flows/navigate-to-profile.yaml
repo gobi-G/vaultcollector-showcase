@@ -1,0 +1,10 @@
+appId: com.vaultcollector.app
+---
+- runFlow: login.yaml
+
+# Navigate to profile tab
+- tapOn: "tab-profile"
+- extendedWaitUntil:
+    visible:
+      id: "profile-screen"
+    timeout: 5000

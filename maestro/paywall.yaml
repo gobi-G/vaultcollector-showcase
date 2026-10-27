@@ -1,0 +1,23 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/navigate-to-profile.yaml
+
+# Tap upgrade button
+- tapOn:
+    id: "profile-upgrade-btn"
+
+# Verify paywall screen is visible
+- extendedWaitUntil:
+    visible:
+      id: "paywall-screen"
+    timeout: 5000
+
+# Go back
+- tapOn:
+    id: "paywall-close-btn"
+
+# Verify back on profile
+- extendedWaitUntil:
+    visible:
+      id: "profile-screen"
+    timeout: 5000

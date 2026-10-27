@@ -1,0 +1,60 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/login.yaml
+
+# Navigate to collection tab
+- tapOn: "tab-collection"
+- extendedWaitUntil:
+    visible:
+      id: "collection-create-btn"
+    timeout: 5000
+
+# Create collection first
+- tapOn:
+    id: "collection-create-btn"
+- tapOn:
+    id: "create-collection-name"
+- inputText: "Test Sammlung"
+- tapOn:
+    id: "create-collection-submit"
+- extendedWaitUntil:
+    visible: "Test Sammlung"
+    timeout: 5000
+
+# Open collection
+- tapOn: "Test Sammlung"
+- extendedWaitUntil:
+    visible:
+      id: "collection-add-item-btn"
+    timeout: 5000
+
+# Add item
+- tapOn:
+    id: "collection-add-item-btn"
+- assertVisible:
+    id: "add-item-search-input"
+- tapOn:
+    id: "add-item-search-input"
+- inputText: "Charizard"
+- tapOn:
+    id: "add-item-search-btn"
+
+# Wait for first search result and tap it
+- extendedWaitUntil:
+    visible:
+      id: "search-result-0"
+    timeout: 10000
+- tapOn:
+    id: "search-result-0"
+
+# Set condition and save
+- tapOn:
+    id: "condition-near_mint"
+- tapOn:
+    id: "add-item-save-btn"
+
+# Should be back on collection detail
+- extendedWaitUntil:
+    visible:
+      id: "collection-detail"
+    timeout: 5000

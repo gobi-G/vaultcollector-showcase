@@ -1,0 +1,67 @@
+{
+  "expo": {
+    "name": "VaultCollector",
+    "slug": "vault-collector",
+    "scheme": "vaultcollector",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0B0F1A",
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B0F1A"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vaultcollector.app",
+      "icon": "./assets/icon.png",
+      "backgroundColor": "#0B0F1A",
+      "infoPlist": {
+        "NSCameraUsageDescription": "VaultCollector benötigt Kamera-Zugriff um Sammelkarten per KI zu erkennen."
+      },
+      "appleTeamId": "RS97Y6FH2M"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0F1A",
+        "foregroundImage": "./assets/icon.png"
+      },
+      "package": "com.vaultcollector.app",
+      "softwareKeyboardLayoutMode": "pan",
+      "backgroundColor": "#0B0F1A",
+      "permissions": [
+        "android.permission.CAMERA"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/icon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0B0F1A",
+          "image": "./assets/icon.png",
+          "imageWidth": 200
+        }
+      ],
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "VaultCollector benötigt Kamera-Zugriff um Sammelkarten per KI zu erkennen."
+        }
+      ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "52cecb70-bc63-482e-a968-b4f4da2499ed"
+      }
+    },
+    "owner": "gopig"
+  }
+}

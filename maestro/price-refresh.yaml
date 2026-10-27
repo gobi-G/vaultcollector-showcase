@@ -1,0 +1,13 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/login.yaml
+
+# Tap refresh prices button on home
+- tapOn:
+    id: "home-refresh-prices-btn"
+
+# Wait for completion — toast or status indicator
+- extendedWaitUntil:
+    visible:
+      id: "prices-updated-toast"
+    timeout: 15000

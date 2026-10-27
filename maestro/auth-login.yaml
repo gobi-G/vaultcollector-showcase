@@ -1,0 +1,42 @@
+appId: com.vaultcollector.app
+---
+- clearState
+- clearKeychain
+- launchApp
+
+# Skip onboarding
+- extendedWaitUntil:
+    visible:
+      id: "onboarding-screen"
+    timeout: 5000
+- tapOn:
+    id: "onboarding-skip"
+
+# Verify welcome screen
+- extendedWaitUntil:
+    visible:
+      id: "welcome-email-btn"
+    timeout: 5000
+- assertVisible: "VaultCollector"
+
+# Navigate to email auth
+- tapOn:
+    id: "welcome-email-btn"
+
+# Enter credentials
+- tapOn:
+    id: "email-input"
+- inputText: "${MAESTRO_TEST_EMAIL}"
+- tapOn:
+    id: "email-password-input"
+- inputText: "${MAESTRO_TEST_PASSWORD}"
+
+# Sign in
+- tapOn:
+    id: "email-submit-btn"
+
+# Should redirect to main app
+- extendedWaitUntil:
+    visible:
+      id: "tabs-home"
+    timeout: 10000

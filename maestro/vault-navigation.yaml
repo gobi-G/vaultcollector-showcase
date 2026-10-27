@@ -1,0 +1,44 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/navigate-to-profile.yaml
+
+# Tap vault button
+- tapOn:
+    id: "profile-vault-btn"
+- extendedWaitUntil:
+    visible:
+      id: "vault-screen"
+    timeout: 5000
+
+# Create a new location
+- tapOn:
+    id: "vault-add-location-btn"
+- extendedWaitUntil:
+    visible:
+      id: "vault-location-name-input"
+    timeout: 3000
+- tapOn:
+    id: "vault-location-name-input"
+- inputText: "Test Regal"
+- tapOn:
+    id: "vault-location-save-btn"
+
+# Verify location is visible
+- extendedWaitUntil:
+    visible: "Test Regal"
+    timeout: 5000
+
+# Navigate into the location
+- tapOn: "Test Regal"
+- extendedWaitUntil:
+    visible:
+      id: "vault-location-detail"
+    timeout: 5000
+
+# Go back
+- tapOn:
+    id: "vault-back-btn"
+- extendedWaitUntil:
+    visible:
+      id: "vault-screen"
+    timeout: 5000

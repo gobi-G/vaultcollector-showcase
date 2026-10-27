@@ -1,0 +1,33 @@
+appId: com.vaultcollector.app
+---
+- runFlow: flows/navigate-to-collection.yaml
+
+# Tap first item
+- tapOn:
+    id: "item-card-0"
+- extendedWaitUntil:
+    visible:
+      id: "item-detail"
+    timeout: 5000
+
+# Tap edit button
+- tapOn:
+    id: "item-edit-btn"
+- extendedWaitUntil:
+    visible:
+      id: "edit-item-screen"
+    timeout: 5000
+
+# Change condition to played
+- tapOn:
+    id: "condition-played"
+
+# Save changes
+- tapOn:
+    id: "edit-item-save-btn"
+
+# Verify back on detail screen
+- extendedWaitUntil:
+    visible:
+      id: "item-detail"
+    timeout: 5000
