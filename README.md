@@ -1,5 +1,7 @@
 # VaultCollector
 
+[![CI](https://github.com/gobi-G/vaultcollector-showcase/actions/workflows/ci.yml/badge.svg)](https://github.com/gobi-G/vaultcollector-showcase/actions/workflows/ci.yml)
+
 Smart inventory tracker for collectors. Point the camera at a trading card and VaultCollector identifies it, finds the exact printing and tracks its value.
 
 Built solo with React Native/Expo and Supabase, using an AI-first workflow (Claude Code with custom agents, rules and commands in [`.claude/`](.claude)).
@@ -26,7 +28,7 @@ Built solo with React Native/Expo and Supabase, using an AI-first workflow (Clau
 | Backend | Supabase: Postgres with RLS, Auth, Storage, Edge Functions (Deno) |
 | AI | OpenAI GPT-4o Vision, Claude |
 | Payments | RevenueCat |
-| Testing | Jest, Deno tests, Maestro (E2E) |
+| Testing | Vitest, Jest, Deno tests, Maestro (E2E), GitHub Actions |
 | Tooling | pnpm workspaces, Turborepo, ESLint, Prettier |
 
 ## Architecture
@@ -36,16 +38,32 @@ apps/mobile/        React Native (Expo) app
 packages/shared/    Single source of truth: Zod schemas, types, validation
 supabase/           Edge Functions, migrations, services, providers, repositories
 maestro/            E2E test flows
-docs/               Architecture and how-to docs
+docs/               How-to docs (AI scan pipeline)
 ```
 
 **Mobile (clean architecture):** Screens → TanStack Query hooks → service interfaces → implementations. The backend can be swapped by changing one file (`src/services/index.ts`).
 
-**Backend (4 layers):** Edge Functions (HTTP) → services (logic) → providers (external APIs) + repositories (DB). Each layer only knows the one below it.
+**Backend (target: 4 layers):** Edge Functions (HTTP) → services (logic) → providers (external APIs) + repositories (DB), each layer only knowing the one below it. `ai-condition` is built fully on these layers. The earlier functions (`ai-scan`, `card-search`, `price-sync`, `delete-account`) still call external APIs and the database directly and are being migrated one at a time; their pure logic (card number normalisation, price and image mapping) already lives in I/O-free modules with unit tests.
 
 **Edge Functions:** `ai-scan`, `ai-condition`, `artwork-match`, `card-search`, `price-sync`, `delete-account`
 
-How the AI scan works end to end: [docs/howto/AI_SCAN.md](docs/howto/AI_SCAN.md)
+How the AI scan works end to end (German): [docs/howto/AI_SCAN.md](docs/howto/AI_SCAN.md)
+
+## Testing
+
+| Layer | Tooling | Run |
+|-------|---------|-----|
+| Shared schemas and business rules | Vitest | `pnpm test` |
+| Mobile utilities (scan confidence scoring) | Jest | `pnpm test` |
+| Edge Function logic, services, providers | Deno test | `cd supabase && deno test --allow-env --allow-net` |
+| User flows on a simulator | Maestro | `pnpm e2e` |
+
+[GitHub Actions](.github/workflows/ci.yml) runs lint, typecheck and all unit tests on every push and pull request.
+
+## Known Limitations
+
+- Pokémon card search runs directly from the app against the public Pokémon TCG API to keep the MVP simple. It moves behind the `card-search` Edge Function before launch.
+- Card search matches English card names only; a multilingual name mapping is planned.
 
 ## Getting Started
 
@@ -67,6 +85,10 @@ pnpm mobile:dev
 | `pnpm mobile:ios` / `pnpm mobile:android` | Run on simulator / emulator |
 | `pnpm lint` | Lint all packages |
 | `pnpm typecheck` | Type check all packages |
+
+## About This Repository
+
+This is a curated portfolio snapshot of a private repository, so the development history is not included.
 
 ## License
 
