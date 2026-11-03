@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
-import type { CardSearchResult } from "@vault-collector/shared";
+import type { ArtworkImage, CardSearchResult } from "@vault-collector/shared";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 import { CircleX } from "lucide-react-native";
@@ -215,7 +215,7 @@ export default function ScanScreen() {
         name: lookupResult.correctedName ?? result.name,
         tcgType: result.tcgType,
         set: lookupResult.correctedSet ?? result.set,
-        number: lookupResult.correctedNumber ?? result.number,
+        number: lookupResult.correctedNumber ?? result.number ?? "",
         rarity: result.rarity,
         estimatedCondition: result.estimatedCondition,
         confidence: lookupResult.confidence,
@@ -248,7 +248,7 @@ export default function ScanScreen() {
     } finally {
       setIsScanning(false);
     }
-  }, []);
+  }, [isConsentGiven, lookup, queryClient]);
 
   const handleReset = useCallback(() => {
     setScanResult(null);

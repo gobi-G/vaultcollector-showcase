@@ -53,6 +53,7 @@ export const supabaseAiScan: IAiScanService = {
       hp: data.hp ?? null,
       variant: data.variant ?? null,
       language: data.language ?? null,
+      visualDescription: data.visualDescription ?? null,
     };
   },
 };

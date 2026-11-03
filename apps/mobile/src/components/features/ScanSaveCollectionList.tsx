@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text } from "react-native";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { ChevronRight, FolderOpen, Plus } from "lucide-react-native";
@@ -13,13 +13,11 @@ type Collection = {
 type ScanSaveCollectionListProps = {
   collections: Collection[] | undefined;
   onSelectCollection: (id: string) => void;
-  onClose?: () => void;
 };
 
 export function ScanSaveCollectionList({
   collections,
   onSelectCollection,
-  onClose,
 }: ScanSaveCollectionListProps) {
   const { t } = useTranslation();
   const router = useRouter();

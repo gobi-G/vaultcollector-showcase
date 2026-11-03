@@ -39,6 +39,8 @@ export function useEnsureDefaultCollection() {
         name: t("firstRun.defaultCollectionName"),
         category: "tcg",
         user_id: user.id,
+        description: null,
+        cover_image_url: null,
       });
       await queryClient.invalidateQueries({ queryKey: ["collections"] });
       return result.id;

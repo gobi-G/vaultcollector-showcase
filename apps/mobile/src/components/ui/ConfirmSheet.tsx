@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal, Pressable, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Check } from "lucide-react-native";
@@ -35,12 +35,15 @@ export function ConfirmSheet({
 }: ConfirmSheetProps) {
   const { t } = useTranslation();
   const [checked, setChecked] = useState(false);
+  const [prevVisible, setPrevVisible] = useState(visible);
 
-  useEffect(() => {
+  // Reset the checkbox whenever the sheet closes (state adjustment during render, no effect needed)
+  if (visible !== prevVisible) {
+    setPrevVisible(visible);
     if (!visible) setChecked(false);
-  }, [visible]);
+  }
 
-  const isConfirmDisabled = isLoading || (checkboxRequired && checkboxLabel && !checked);
+  const isConfirmDisabled = isLoading || (checkboxRequired && Boolean(checkboxLabel) && !checked);
 
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={isLoading ? undefined : onCancel}>

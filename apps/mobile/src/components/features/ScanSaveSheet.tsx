@@ -185,7 +185,6 @@ export function ScanSaveSheet({
               <ScanSaveCollectionList
                 collections={collections}
                 onSelectCollection={handleSelectCollection}
-                onClose={handleClose}
               />
             )
           ) : (
