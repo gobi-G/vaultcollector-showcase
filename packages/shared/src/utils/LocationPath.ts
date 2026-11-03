@@ -1,31 +1,35 @@
 import type { Location } from "../types/Location.types";
 
-export function getFullLocationPath(locations: Location[], locationId: string): string {
+/**
+ * Walks from a location up to its root via `parent_id`.
+ * Stops on unknown ids and on cycles, so corrupted data can never hang the UI.
+ */
+function walkToRoot(locations: Location[], locationId: string): Location[] {
   const locationMap = new Map(locations.map((loc) => [loc.id, loc]));
-  const parts: string[] = [];
+  const visited = new Set<string>();
+  const chain: Location[] = [];
   let currentId: string | null = locationId;
 
-  while (currentId) {
+  while (currentId && !visited.has(currentId)) {
     const loc = locationMap.get(currentId);
     if (!loc) break;
-    parts.unshift(loc.name);
+    visited.add(currentId);
+    chain.unshift(loc);
     currentId = loc.parent_id;
   }
 
-  return parts.join(" › ");
+  return chain;
 }
 
-export function getLocationBreadcrumbs(locations: Location[], locationId: string): Location[] {
-  const locationMap = new Map(locations.map((loc) => [loc.id, loc]));
-  const breadcrumbs: Location[] = [];
-  let currentId: string | null = locationId;
+export function getFullLocationPath(locations: Location[], locationId: string): string {
+  return walkToRoot(locations, locationId)
+    .map((loc) => loc.name)
+    .join(" › ");
+}
 
-  while (currentId) {
-    const loc = locationMap.get(currentId);
-    if (!loc) break;
-    breadcrumbs.unshift(loc);
-    currentId = loc.parent_id;
-  }
-
-  return breadcrumbs;
+export function getLocationBreadcrumbs(
+  locations: Location[],
+  locationId: string,
+): Location[] {
+  return walkToRoot(locations, locationId);
 }
