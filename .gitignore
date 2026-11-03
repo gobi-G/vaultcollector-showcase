@@ -21,3 +21,7 @@ android/
 
 # Benchmark (local only — images, tokens, results)
 benchmark/
+
+# Local Claude Code memory (machine-specific)
+.claude/projects/
+.claude/settings.local.json

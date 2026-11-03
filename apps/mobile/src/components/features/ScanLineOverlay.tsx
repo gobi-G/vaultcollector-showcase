@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import Animated, {
-  useSharedValue,
+  Easing,
   useAnimatedStyle,
+  useSharedValue,
   withRepeat,
   withTiming,
-  Easing,
 } from "react-native-reanimated";
 import { colors } from "@/constants/theme";
 
@@ -23,7 +23,7 @@ export function ScanLineOverlay({ phaseText }: ScanLineOverlayProps) {
       -1,
       true,
     );
-  }, [height]);
+  }, [height, translateY]);
 
   const lineStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }],
